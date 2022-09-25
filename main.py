@@ -1,29 +1,25 @@
-def main():
-   while True:
-        print('''
-                ----Main menu----
-                1. Customer Operations 
-                2. Product OPerations 
-                3. Purchase operation 
-                4. Queries 
-                5. Exit
-        ''')
+from customer import *
+from product import *
+from queries import *
 
-        option= int(input("choose one of the options below"))
-        if option == 1:
-            customeroperations()
+def menu():
+    print("**** WELCOME PLEASE INPUT AN OPTION TO PROCEED****")
+    print("1. Customer operations")
+    print("2. Product operations")
+    print("3. Search operations")
+    print("4. Quit")
 
-        elif option == 2:
-            productoperations()
-        
-        elif option == 3:
-            queries()
-        
-        elif option == 4:
-            quit()
+    option=int(input("Choose an option: "))
+    if option==1:
+        customermenu()
+    elif option==2:
+        productmenu()
+    elif option==3:
+        queries()
+    elif option==4:
+        quit()
+    else:
+        print("Please enter a valid input")
 
-        elif option == 6:
-            print("select a valid option ")
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     menu()
