@@ -1,5 +1,5 @@
 
-def productmenu():
+def product_menu():
     print("**** PRODUCT OPERATIONS ****")
     print("1. Add a new product")
     print("2. Delete a product")
