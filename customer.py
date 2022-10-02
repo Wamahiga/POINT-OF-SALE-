@@ -1,72 +1,72 @@
-import random
+import os
+customers = []
+class Customer:
+
+    def __init__(self, id, gender, name, address):
+        
+
+        # instance variables
+        self.id = id
+        self.gender = gender
+        self.name = name
+        self.address = address
 
 def customer_operations():
-    print("[1]. Add customer")
-    print("[2]. Delete customer")
-    print("[3]. Update customer")
-    print("[4].  Back to Main Menu")
+    customer_list = []
 
-    option = int(input("Choose One Option: "))
+    while True:
+        print(
+            """
+            ***CUSTOMER MENU ***
+            1.Customer List
+            2.Add a new customer
+            3.Update a customer
+            4.Delete a customer
+            5.Search a customer
+            0.Back to main menu
+            """
+        )
 
-    while option:
+        option = int(input("Please input an option to proceed:"))
+
         if option == 1:
-            add_customer()
-            break
-        elif option == 2:
-            delete_customer()
-            break
-        elif option == 3:
+            print()
+            list_customers()
+        elif option ==2:
+            print()
+            customer_list.append(create_customer())
+            print(customer_list)
+
+        elif option ==3:
+            print()
             update_customer()
-            break
+
         elif option == 4:
-            from main import menu
-            menu()
+            print()
+            delete_customer()
+        
+        elif option == 5:
+            search_customer()
+
+        elif option == 0:
+            print()
             break
 
-def add_customer():
-    customer_id = random.randint(10000, 100000)
-    customer_name = input("ENTER CUSTOMER NAME: ")
-    customer_gender = input("WHAT IS YOUR GENDER:")
-    customer_phone = input("ENTER CUSTOMER PHONE NUMBER: ")
+        else:
+            print()
+            print('Invalid option')
 
-    z = f'{customer_id},{customer_name},{customer_gender},{customer_phone}\n'
+##option 1 list customer function
 
-    with open('customer.txt', 'a') as outfile:
-        print("Customer Added successfully.")
-        outfile.write(z)
+def list_customers():
+    customers = []
+    customer_list =[]
+    with open('customer.txt','r') as reader:
+        for line in reader.readlines():
+            customers.append(line)
 
+    for n in customers:
+        lists = n.replace('\n', '')
+        customer_list.append(lists)
+    print(customer_list)
 
-def update_customer():
-    with open("customer.txt", "r") as s:
-        slist = s.readlines()
-        customer_id = input("ENTER CUSTOMER ID: ")
-        for Line in slist:
-            if customer_id in Line:
-                line_index = slist.index(Line)
-
-                user_input = input("ENTER NEW PHONE NUMBER: ")
-                k = Line.split(',')
-                k[2] = user_input
-        s = ','
-        slist[line_index] = s.join(k)
-
-        with open('customer.txt', 'w') as outfile:
-            print("Customer Updated successfully.")
-            for Line in slist:
-                outfile.write(Line)
-
-
-def delete_customer():
-    with open("customer.txt", "r") as s:
-        slist = s.readlines()
-        customer_id = input("ENTER CUSTOMER ID: ")
-        for Line in slist:
-            if customer_id in Line:
-                line_index = slist.index(Line)
-
-                slist.pop(line_index)
-
-        with open('customer.txt', 'w') as outfile:
-            print("Customer Deleted successfully.")
-            for Line in slist:
-                outfile.write(Line)
