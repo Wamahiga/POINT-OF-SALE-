@@ -2,4 +2,5 @@
 51968,Joy w,436546565363
 81048,wamahiga cynthia,female,
 1,wanjiru,wadsa
-23,male,waas,wanyeri
+23,john,male,5576
+45,iui,yui,23]

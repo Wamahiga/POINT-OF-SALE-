@@ -86,6 +86,8 @@ def create_customer():
                 print()
                 print("user id exists! enter a different id")
                 return create_customer()
+
+    
     customer_name = input("Enter Customer name:  ").lower()
     customer_gender= input("What is the customer's gender: ").lower()
     address = input("Enter customer address:   ")
@@ -96,6 +98,33 @@ def create_customer():
     print()
     output = {"id": customer_id, "gender": customer_gender, "name": customer_name, "address": address}
     return output
+
+
+def update_customer():
+    file = open('customer.txt', 'r')
+    temp = open('temp.txt', 'w')
+    id = int(input("Enter customer id"))
+    uf = " "
+    while(uf):
+        uf = file.readline()
+        s = uf.split(",")
+        if len(uf)>0:
+            if int(s[0])==id:
+                name = input("Enter Customer name: ").lower()
+                gender = input("what is the customers gender?")
+                address = input("enter customer address: ")
+                temp.write(str(id) + ',' + name + ',' + gender + ',' + address + "\n")
+            else:
+                temp.write(uf)
+    temp.close()
+    file.close()
+    os.remove('customer.txt')
+    os.rename('temp.txt','customer.txt')
+    print("CUSTOMER UPDATED SUCCESFULLY!!!")
+    list_customers
+
+
+
 
 
 
