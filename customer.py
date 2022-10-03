@@ -27,7 +27,7 @@ def customer_operations():
             """
         )
 
-        option = int(input("Please input an option to proceed:"))
+        option = int(input("Please input an option to proceed:  "))
 
         if option == 1:
             print()
@@ -54,7 +54,7 @@ def customer_operations():
 
         else:
             print()
-            print('Invalid option')
+            print('Invalid option!,Please try again')
 
 ##option 1 list customer function
 
@@ -123,7 +123,64 @@ def update_customer():
     print("CUSTOMER UPDATED SUCCESFULLY!!!")
     list_customers
 
+    ##error handling
 
+def delete_customer():
+    customer = open("customer.txt", 'r')
+    temp =open("temp.txt", 'w')
+    id = int(input("Enter customer id to delete: "))
+    df= ' '
+    while(df):
+        df = customer.readline()
+        s = df.split(',')
+        if len(df)>0:
+            if int(s[0]) !=id:
+                temp.write(df)
+
+    customer.close()
+    temp.close()
+    os.remove('customer.txt')
+    os.rename('temp.txt','customer.txt')
+    print("Customer is deleted successfuly! ")
+    list_customers()
+
+
+def search_customer():
+    customer = open('customer.txt','r')
+    id = int(input("Enter customer id:  "))
+    print()
+    s = ' '
+    while(s):
+        s = customer.readline()
+        L = s.split(",")
+        if len(s)>0:
+            if int(L[0]) == id:
+                print("************CUSTOMER DETAILS****************")
+                print("Customer id: ",L[0])
+                print("Customer Name: ",L[1])
+                print("Customer Address: ",L[2])
+
+
+
+def show_customers():
+    file = open('customer.txt','r')
+    for i in file:
+        item = i.split(',')
+        id = item[0]
+        name = item[1]
+        address = item[2]
+        customer = Customer(id,name,address)
+        customers.append(customer)
+        
+
+
+
+
+
+
+
+    if __name__ == "__main__":
+        customer_operations()
 
 
 
