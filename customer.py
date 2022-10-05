@@ -31,7 +31,7 @@ def customer_operations():
 
         if option == 1:
             print()
-            list_customers()
+            view_customers()
         elif option ==2:
             print()
             customer_list.append(create_customer())
@@ -58,7 +58,7 @@ def customer_operations():
 
 ##option 1 list customer function
 
-def list_customers():
+def view_customers():
     customers = []
     customer_list =[]
     with open('customer.txt','r') as reader:
@@ -121,7 +121,7 @@ def update_customer():
     os.remove('customer.txt')
     os.rename('temp.txt','customer.txt')
     print("CUSTOMER UPDATED SUCCESFULLY!!!")
-    list_customers
+    view_customers
 
     ##error handling
 
@@ -142,7 +142,7 @@ def delete_customer():
     os.remove('customer.txt')
     os.rename('temp.txt','customer.txt')
     print("Customer is deleted successfuly! ")
-    list_customers()
+    view_customers()
 
 
 def search_customer():

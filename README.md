@@ -1,1 +1,1 @@
-# python cli point of sale
+# python cli customer of sale
