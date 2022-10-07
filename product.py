@@ -17,12 +17,12 @@ def product_operations():
     while True:
         print("""
         *******PRODUCT MENU*******
-        1. Product List
-        2. Create a product
-        3. Update a product
-        4. Delete a product
-        5. Search a product
-        0. Back to main menu
+        [1]. Product List
+        [2]. Create a product
+        [3]. Update a product
+        [4]. Delete a product
+        [5]. Search a product
+        [0]. Back to main menu
         """)
 
         option = int(input("Choose a product option: "))
@@ -132,7 +132,7 @@ def delete_product():
         df= product.readline()
         s = df.split(',')
         if len(df)>0:
-            if int(s[0]) !=id:
+            if (s[0]) !=id:
                 temp.write(df)
 
     product.close()

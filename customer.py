@@ -2,152 +2,163 @@ import os
 customers = []
 class Customer:
 
-    def __init__(self, id, gender, name, address):
+    def __init__(self, id, name, address):
         
 
         # instance variables
         self.id = id
-        self.gender = gender
         self.name = name
         self.address = address
+
+        
+        
 
 def customer_operations():
     customer_list = []
 
     while True:
-        print(
-            """
-            ***CUSTOMER MENU ***
-            1.Customer List
-            2.Add a new customer
-            3.Update a customer
-            4.Delete a customer
-            5.Search a customer
-            0.Back to main menu
-            """
-        )
+        print("""
+        ****Customer menu****
+        [1]. Customer List
+        [2]. Create a customer
+        [3]. Update a customer
+        [4]. Delete a customer
+        [5]. Search customer
+        [0]. Quit
+        """)
 
-        option = int(input("Please input an option to proceed:  "))
+        option4 = int(input("Choose a customer option: "))
 
-        if option == 1:
+        if option4 == 1:
             print()
-            view_customers()
-        elif option ==2:
+            list_customers()
+        elif option4 ==2:
             print()
             customer_list.append(create_customer())
             print(customer_list)
 
-        elif option ==3:
+        elif option4 ==3:
             print()
             update_customer()
 
-        elif option == 4:
+        elif option4 == 4:
             print()
             delete_customer()
         
-        elif option == 5:
+        elif option4 == 5:
             search_customer()
 
-        elif option == 0:
+        elif option4 == 0:
             print()
             break
 
         else:
             print()
-            print('Invalid option!,Please try again')
+            print('Oops! Incorrect option. Please try again! ')
 
-##option 1 list customer function
+        
 
-def view_customers():
+
+
+
+def list_customers():
     customers = []
-    customer_list =[]
+    customers_list = []
     with open('customer.txt','r') as reader:
         for line in reader.readlines():
             customers.append(line)
+   
+    for c in customers:
+        lists = c.replace('\n','')
+        customers_list.append(lists)
+    print(customers_list)
 
-    for n in customers:
-        lists = n.replace('\n', '')
-        customer_list.append(lists)
-    print(customer_list)
+
+
 
 def create_customer():
-
-    f = open('customer.txt','a+', newline='')
-
-    customer_id = input("Enter customer id : ")
-    with open("customer.txt", 'r') as f_r:
-
-        for line in f_r.readlines():
+    
+    pt = open('customer.txt', 'a+', newline='')
+    
+    customer_id = input("Enter Customer id : ")
+    with open("customer.txt",'r') as pt_r:
+        
+        for line in pt_r.readlines():
             element_list = []
             line_data = line.split(',')
             element_list.append(line_data[0])
+        
 
             if customer_id in element_list:
                 print()
-                print("user id exists! enter a different id")
+                print("The ID already exists!! Enter a a different ID !!")
+                print()
                 return create_customer()
 
-    
+    # user inputs
     customer_name = input("Enter Customer name:  ").lower()
-    customer_gender= input("What is the customer's gender: ").lower()
     address = input("Enter customer address:   ")
-    f.write(customer_id + ',' +customer_gender + ',' +  customer_name  +  ','  +  address + "\n")
-    f.close()
-    if(f):
-        print("New Customer added successfully!!!")
+    pt.write(customer_id + ',' +  customer_name  +  ','  +  address + "\n")
+    pt.close()
+    if(pt):
+        print("Customer added successfully!!!")
     print()
-    output = {"id": customer_id, "gender": customer_gender, "name": customer_name, "address": address}
+    output = {"id": customer_id, "name": customer_name, "address": address}
     return output
 
 
 def update_customer():
-    file = open('customer.txt', 'r')
-    temp = open('temp.txt', 'w')
-    id = int(input("Enter customer id"))
-    uf = " "
-    while(uf):
-        uf = file.readline()
-        s = uf.split(",")
-        if len(uf)>0:
-            if int(s[0])==id:
-                name = input("Enter Customer name: ").lower()
-                gender = input("what is the customers gender?")
-                address = input("enter customer address: ")
-                temp.write(str(id) + ',' + name + ',' + gender + ',' + address + "\n")
+    file = open('customer.txt','r')
+    temp = open('temp.txt','w')
+    id = int(input("Enter customer id to change: "))
+    st =" "
+    while(st):
+        st = file.readline()
+        J = st.split(",")
+        if len(st)>0:
+            if int(J[0])==id:
+                name = input("Enter customer name: ").lower()
+                address = input("Enter customer address: ")
+                temp.write(str(id) + ',' + name + ',' + address + "\n")
             else:
-                temp.write(uf)
+                temp.write(st)
     temp.close()
     file.close()
     os.remove('customer.txt')
     os.rename('temp.txt','customer.txt')
-    print("CUSTOMER UPDATED SUCCESFULLY!!!")
-    view_customers
+    print("Customer is updated successfully!")
+    list_customers()
 
-    ##error handling
+
+   
+
+
+
+
 
 def delete_customer():
     customer = open("customer.txt", 'r')
     temp =open("temp.txt", 'w')
     id = int(input("Enter customer id to delete: "))
-    df= ' '
-    while(df):
-        df = customer.readline()
-        s = df.split(',')
-        if len(df)>0:
-            if int(s[0]) !=id:
-                temp.write(df)
+    st = ' '
+    while(st):
+        st = customer.readline()
+        J = st.split(',')
+        if len(st)>0:
+            if int(J[0]) !=id:
+                temp.write(st)
 
     customer.close()
     temp.close()
     os.remove('customer.txt')
     os.rename('temp.txt','customer.txt')
     print("Customer is deleted successfuly! ")
-    view_customers()
+    list_customers()
 
 
 def search_customer():
     customer = open('customer.txt','r')
-    id = int(input("Enter customer id:  "))
+    id = int(input("Enter customer id to search:  "))
     print()
     s = ' '
     while(s):
@@ -155,7 +166,8 @@ def search_customer():
         L = s.split(",")
         if len(s)>0:
             if int(L[0]) == id:
-                print("************CUSTOMER DETAILS****************")
+                print("Customer details")
+                print("****************************")
                 print("Customer id: ",L[0])
                 print("Customer Name: ",L[1])
                 print("Customer Address: ",L[2])
@@ -181,7 +193,3 @@ def show_customers():
 
     if __name__ == "__main__":
         customer_operations()
-
-
-
-
